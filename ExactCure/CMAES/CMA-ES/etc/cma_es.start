@@ -1,0 +1,64 @@
+// Copyright (C) 2008 - INRIA
+// Copyright (C) 2009 - DIGITEO
+
+// This file is released under the 3-clause BSD license. See COPYING-BSD.
+
+function cma_eslib = startModule()
+
+  toolbox_name = "CMA-ES Optimization Toolbox"
+
+  mprintf("Start " + toolbox_name + "\n");
+
+  if isdef("cma_eslib") then
+    warning("CMA-ES library is already loaded");
+    return;
+  end
+
+  etc_tlbx  = get_absolute_file_path("cma_es.start");
+  etc_tlbx  = getshortpathname(etc_tlbx);
+  root_tlbx = strncpy( etc_tlbx, length(etc_tlbx)-length("\etc\") );
+
+//Load  functions library
+// =============================================================================
+  mprintf("\tLoad macros\n");
+  pathmacros = pathconvert( root_tlbx ) + "macros" + filesep();
+  cma_eslib = lib(pathmacros);
+
+// load gateways
+// =============================================================================
+//  mprintf("\tLoad gateways\n");
+//  verboseMode = ilib_verbose();
+//  ilib_verbose(0);
+//  exec(pathconvert(root_tlbx+"/sci_gateway/loader_gateway.sce",%f));
+//  ilib_verbose(verboseMode);
+
+// Load and add help chapter
+// =============================================================================
+  if or(getscilabmode() == ["NW";"STD"]) then
+    mprintf("\tLoad help\n");
+    path_addchapter = pathconvert(root_tlbx+"/jar");
+    if ( isdir(path_addchapter) <> [] ) then
+      add_help_chapter(toolbox_name, path_addchapter, %F);
+    end
+  end
+
+// Load demos
+// =============================================================================
+  if or(getscilabmode() == ["NW";"STD"]) then
+    mprintf("\tLoad demos\n");
+    pathdemos = pathconvert(root_tlbx+"/demos/cma.dem.sce", %F, %T);
+    add_demo(toolbox_name, pathdemos);
+  end
+
+// Load Preferences GUI
+// =============================================================================
+//  if getscilabmode() == "STD" then
+//    addModulePreferences(toolbox_name, root_tlbx, etc_tlbx + "cma_es_preferences.xml");
+//  end
+
+endfunction
+
+cma_eslib = startModule();
+clear startModule; // remove startModule on stack
+cma(); // Initial load of function cma() will load the definitions for cma-es toolbox.
+       // See cma.sci for details.

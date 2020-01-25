@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab"
+  xml:lang="en"
+  xml:id="cma_optim_restarted">
+
+<info><pubdate>30-May-2008</pubdate></info>
+
+<refnamediv>
+  <refname>cma_optim_restarted</refname>
+  <refpurpose>A functional interface to the CMA-ES optimizer with restarts</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <title>Calling Sequence</title>
+  <synopsis>[xopt, f, out, param] = cma_optim_restarted(costf, x0, sigma0, restarts [, param])</synopsis>
+</refsynopsisdiv>
+
+   <refsection><title>Parameters</title>
+
+      <variablelist>
+
+
+         <varlistentry>
+
+            <term>costf</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>x0</term>
+
+            <listitem>
+
+               <para>
+        the initial solution point, see cma_optim(). When the initial
+        point is chosen randomly, e.g. rand(10,1), consider using a
+        string, i.e. 'rand(10,1)', which is evaluated for each restart
+        anew.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>sigma0</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>restarts</term>
+
+            <listitem>
+
+               <para>
+        maximal number of restarts.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>param</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>xopt</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>f</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>out</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+         <varlistentry>
+
+            <term>param</term>
+
+            <listitem>
+
+               <para>
+        see cma_optim()
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+      </variablelist>
+
+   </refsection>
+
+
+   <refsection><title>Description</title>
+
+      <itemizedlist>
+
+         <listitem>
+
+            <para>Calls the function cma_optim several times with increasing population
+        size parameter opt.lambda. For each restart the population size lambda
+        is increased by a factor of two. No further restarts are conducted when
+        the target fitness or the maximum number of function evaluation maxfunevals
+        was reached.
+     </para>
+
+         </listitem>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+      </itemizedlist>
+
+   </refsection>
+
+
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[see cma_optim]]></programlisting></refsection>
+
+
+   <refsection><title>See Also</title><simplelist type="inline">
+
+      <member>
+         <link linkend="cma_optim"> cma_optim</link>
+      </member>
+
+      <member>
+         <link linkend="cma_new"> cma_new</link>
+      </member>
+
+      <member>
+         <link linkend="cma_plot"> cma_plot</link>
+      </member>
+
+      <member>
+         <link linkend="optim"> optim</link>
+      </member>
+
+   </simplelist></refsection>
+
+
+   <refsection><title>Authors</title><variablelist>
+
+      <varlistentry><term>Nikolaus Hansen</term><listitem><para>
+
+      </para></listitem></varlistentry>
+
+   </variablelist></refsection>
+
+
+   <refsection><title>Bibliography</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+
+   <refsection><title>Used Functions</title>
+
+      <para>cma_optim()
+     </para>
+
+      <para>...
+     </para>
+
+   </refsection>
+
+</refentry>

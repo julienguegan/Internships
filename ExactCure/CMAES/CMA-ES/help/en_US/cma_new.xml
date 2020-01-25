@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab"
+  xml:lang="en"
+  xml:id="cma_new">
+
+<info><pubdate>3-May-2008</pubdate></info>
+
+<refnamediv>
+  <refname>cma_new</refname>
+  <refpurpose>Constructor for CMA-ES, a (stochastic) non-convex function minimizer </refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <title>Calling Sequence</title>
+  <synopsis>
+    param = cma_new() // return default parameters
+    param = cma_new([]) // return default parameters quietly
+    es = cma_new(param) // return initialized CMA-ES object
+    [es param] = cma_new(param) // return also actual parameter setting
+  </synopsis>
+</refsynopsisdiv>
+
+   <refsection><title>Parameters</title>
+
+      <variablelist>
+
+         <varlistentry>
+
+            <term>param</term>
+
+            <listitem>
+
+               <para>
+       struct (or list) of parameters. param=cma_new() returns a struct
+       with valid field names and their default values and a short
+       description in param.readme, param=cma_new([]) does the same
+       quietly.
+       </para>
+
+               <para>
+       Mandatory parameters that need to be set by the user
+       are (i) param.x0, the initial solution point (column vector)
+       and (ii) scalar param.sigma0, the initial search standard deviation
+       acting on param.x0,
+       typically 1/3 of the typical variable ranges.
+       param.opt_scaling_of_variables must be used if the variables
+       ranges are essentially different.
+       </para>
+
+               <para>
+       param.verb controls verbosity. After the
+       objective function is debugged and when the
+       returned solution(s) are satisfactory, logmodulo=0 (no data
+       saving) and displaymodulo=0 (no screen output) make the code
+       completely quiet (and faster).
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>es</term>
+
+            <listitem>
+
+               <para>
+         tlist of type 'cma', an optimizer according to OMD
+         specifications: defined functions are X=cma_ask(es),
+         es=cma_tell(es,X,y), and [y x]=cma_best(es) (all also
+         starting with '%'), and the boolean field es.stop. CAVE: for
+         the time being X is a list with lambda column vectors, see
+         example.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>es.param</term>
+
+            <listitem>
+
+               <para>
+       struct of the actually used parameters
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>es.out</term>
+
+            <listitem>
+
+               <para>
+         useful output collected in a struct (useful only after some iterations on es).
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+      </variablelist>
+
+   </refsection>
+
+
+   <refsection><title>Description</title>
+
+      <itemizedlist>
+
+         <listitem>
+
+            <para>CMA-ES is a stochastic optimizer for nonlinear nonconvex objective
+     functions. It can make perfectly sense to re-run the optimizer several
+     times. The initial seed is collected in es.out.seed and using
+     rand('seed', es.out.seed) will reproduce the same run.
+     </para>
+
+            <para> The verbosity can be controlled using param.verb (see above).
+     Running the code quietly is only recommended after extensive
+     testings. For longer runs, setting verb.plotmodulo=0 and plotting
+     the data from a second Scilab terminal (using function) cma_plot is
+     well worth considering.
+     </para>
+
+         </listitem>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+      </itemizedlist>
+
+   </refsection>
+
+
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+   // see demos/runcma.sce
+
+   // get aquired
+   p = cma_new();  // return (default) parameters
+   disp(p);        // investigate default parameters
+   p.readme        // display doc for parameters
+   p.stop          // investigate the possible and default termination criteria
+   clear p         // we do not need the defaults for initialization
+
+   // initialization
+   p.x0 = rand(10,1);  // mandatory: initial solution vector
+   p.sigma0 = 0.3;     // mandatory: initial standard deviation on x0
+                       //    (somewhat a search range)
+
+   es = cma_new(p);  // get an cma "object", constructor call
+   fitfun = ...  // objective function needs to be defined
+
+   // iteration loop
+   while ~ cma_stop(es)
+     X = cma_ask(es);  // list of solution points (column vectors)
+     y = [];            // just in case
+     for i = 1:length(X)
+       y(i) = fitfun(X(i));    // evaluate each point
+     end
+     es = cma_tell(es, X, y');  // update for the next iteration
+   end
+
+   // output
+   [ybest, xbest] = cma_best(es);
+   printf(" \n x(1) = %f   y = %f\n", xbest(1), ybest);
+
+   for str = es.out.stopflags
+     disp(' ' + str);  // display termination reasons
+   end
+
+   disp(es.out); // further investigate some useful output
+   ]]></programlisting></refsection>
+
+
+   <refsection><title>See Also</title><simplelist type="inline">
+
+      <member>
+         <link linkend="cma_ask"> cma_ask</link>
+      </member>
+
+      <member>
+         <link linkend="cma_tell"> cma_tell</link>
+      </member>
+
+      <member>
+         <link linkend="cma_plot"> cma_plot</link>
+      </member>
+
+      <member>
+         <link linkend="cma_optim"> cma_optim</link>
+      </member>
+
+   </simplelist></refsection>
+
+
+   <refsection><title>Authors</title><variablelist>
+
+      <varlistentry><term>Nikolaus Hansen</term><listitem><para>
+
+      </para></listitem></varlistentry>
+
+   </variablelist></refsection>
+
+
+   <refsection><title>Bibliography</title>
+
+      <para>
+  Hansen, N. (2006). The CMA Evolution Strategy: A Comparing Review.
+  In J.A. Lozano, P. Larranga, I. Inza and E. Bengoetxea (Eds.).
+  Towards a new evolutionary computation. Advances in estimation of
+  distribution algorithms. pp. 75-102, Springer.
+    </para>
+
+      <para>
+  Hansen, N. and S. Kern (2004). Evaluating the CMA Evolution
+  Strategy on Multimodal Test Functions.  Eighth International
+  Conference on Parallel Problem Solving from Nature PPSN VIII,
+  Proceedings, pp. 282-291, Berlin: Springer.
+  (http://www.bionik.tu-berlin.de/user/niko/ppsn2004hansenkern.pdf)
+    </para>
+
+      <para>
+  Hansen, N., S.D. Mueller and P. Koumoutsakos (2003). Reducing the
+  Time Complexity of the Derandomized Evolution Strategy with
+  Covariance Matrix Adaptation (CMA-ES). Evolutionary Computation,
+  11(1).  (http://mitpress.mit.edu/journals/pdf/evco_11_1_1_0.pdf).
+    </para>
+
+      <para>
+  Hansen, N. and A. Ostermeier (2001). Completely Derandomized
+  Self-Adaptation in Evolution Strategies. Evolutionary Computation,
+  9(2), pp. 159-195.
+  (http://www.bionik.tu-berlin.de/user/niko/cmaartic.pdf).
+    </para>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+
+   <refsection><title>Used Functions</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+</refentry>

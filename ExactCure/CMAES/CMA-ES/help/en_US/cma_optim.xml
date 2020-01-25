@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab"
+  xml:lang="en"
+  xml:id="cma_optim">
+
+<info><pubdate>3-May-2008</pubdate></info>
+
+<refnamediv>
+  <refname>cma_optim</refname>
+  <refpurpose>A functional interface to the CMA-ES optimizer, a (stochastic) non-convex function minimizer</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <title>Calling Sequence</title>
+  <synopsis>
+    param = cma_optim()
+    param = cma_optim([])
+    [xopt, f, out, param] = cma_optim(costf, x0, sigma0 [, param])
+  </synopsis>
+</refsynopsisdiv>
+
+
+   <refsection><title>Parameters</title>
+
+      <variablelist>
+
+
+         <varlistentry>
+
+            <term>costf</term>
+
+            <listitem>
+
+               <para>
+       objective function (cost function) to be minimized. costf must
+       accept a column vector as input and return the scalar cost to
+       be minimized. The return value %nan is allowed and leads to an
+       immediate resampling (and (re-)evaluation) of the solution
+       during the same iteration.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>x0</term>
+
+            <listitem>
+
+               <para>
+       initial solution, a column vector of real values.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>sigma0</term>
+
+            <listitem>
+
+               <para>
+       the initial standard deviation acting on x0,
+       typically 1/3 of the typical variable ranges. If the ranges
+       of variables are different, use param.scaling_of_variables
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>param</term>
+
+            <listitem>
+
+               <para>
+       optional parameters collected in a struct. '[]' or '{}' invokes
+       all default settings. param.verb controls verbosity. After the
+       objective function is debugged and when the returned
+       solution(s) are satisfactory, logmodulo=0 (no data saving) and
+       displaymodulo=0 (no screen output) make the code completely
+       quiet (and faster).
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>xopt</term>
+
+            <listitem>
+
+               <para>
+       best found solution vector. On noisy functions and for robust
+       optimization out.solutions.mean.x might be the better choice.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>f</term>
+
+            <listitem>
+
+               <para>
+       function value of xopt: f=costf(xopt)
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>out</term>
+
+            <listitem>
+
+               <para>
+         additional useful output collected in a struct.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+         <varlistentry>
+
+            <term>param</term>
+
+            <listitem>
+
+               <para>output parameter param contains the actually used parameters
+           (some of them might have been evaluated), including x0 and sigma0.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+      </variablelist>
+
+   </refsection>
+
+
+   <refsection><title>Description</title>
+
+      <itemizedlist>
+
+         <listitem>
+
+            <para>The function cma_optim uses the functions cma_new() and other
+     cma_*() funcions that implement the CMA-ES in a more object
+     oriented way.
+     </para>
+
+            <para>The CMA-ES is a stochastic optimizer. It can make
+     perfect sense to re-run the code several times.
+     </para>
+
+         </listitem>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+      </itemizedlist>
+
+   </refsection>
+
+
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  getf('fitfuns.sci');    // define frosen and felli, file should be in CMA-ES-vXXX/demos
+  [f x out] = cma_optim(frosen, rand(8,1), 0.3); // minimize 8-D Rosenbrock function
+  disp(f)                 // display achieved function value, x is the delivered solution
+
+  p = cma_optim([]);      // get optional parameters
+  disp(p.stop);           // lets see the possible and default termination criteria
+  p.readme.stop           // lets see what the entries mean
+  p.stop.fitness = 1e-9;  // set target function value (minimization)
+  p.verb.plotmodulo = 0;  // turn plotting off this time
+  [f x out] = cma_optim(felli, ones(15,1), 1, p);  // minimize 15-D hyper-ellipsoid function
+
+  disp(out.solutions.bestever.f);    // show the best-ever function value
+  disp(felli(out.solutions.mean.x)); // might be an even better solution
+  cma_plot;               // let's finally plot the run
+
+  ]]></programlisting></refsection>
+
+
+   <refsection><title>See Also</title><simplelist type="inline">
+
+      <member>
+         <link linkend="cma_new"> cma_new</link>
+      </member>
+
+      <member>
+         <link linkend="cma_plot"> cma_plot</link>
+      </member>
+
+      <member>
+         <link linkend="cma_optim_restarted"> cma_optim_restarted</link>
+      </member>
+
+      <member>
+         <link linkend="optim"> optim</link>
+      </member>
+
+   </simplelist></refsection>
+
+
+   <refsection><title>Authors</title><variablelist>
+
+      <varlistentry><term>Nikolaus Hansen</term><listitem><para>
+
+      </para></listitem></varlistentry>
+
+   </variablelist></refsection>
+
+
+   <refsection><title>Bibliography</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+
+   <refsection><title>Used Functions</title>
+
+      <para>cma_new()
+     </para>
+
+      <para>cma_ask()
+     </para>
+
+      <para>cma_tell()
+     </para>
+
+      <para>...
+     </para>
+
+   </refsection>
+
+</refentry>

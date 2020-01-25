@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab"
+  xml:lang="en"
+  xml:id="cma_plot">
+
+<info><pubdate>2-May-2008</pubdate></info>
+
+<refnamediv>
+  <refname>cma_plot</refname>
+  <refpurpose>Plots data written by a cma object, a CMA-ES optimizer</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <title>Calling Sequence</title>
+  <synopsis>
+    cma_plot
+    cma_plot(plotrange = [0 220])
+    cma_plot(fignb,name_prefix,name_extension,object_variables_name,plotrange)
+  </synopsis>
+</refsynopsisdiv>
+
+   <refsection><title>Parameters</title>
+
+      <variablelist>
+
+
+         <varlistentry>
+
+            <term>fignb</term>
+
+            <listitem>
+
+               <para>
+       number of the figure where to plot
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>name_prefix</term>
+
+            <listitem>
+
+               <para>
+          prefix of the filenames which are read, by default "outcmaes"
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>name_extension</term>
+
+            <listitem>
+
+               <para>
+           by default ".xml"
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>object_variables_name</term>
+
+            <listitem>
+
+               <para>
+        "xmean" (default) or "xrecent". The former plots the mean of
+        the sample distribution versus function evaluations, the
+        latter the best solution in the iteration versus function
+        evaluation.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>plotrange</term>
+
+            <listitem>
+
+               <para>
+          x-range (number of function evaluations) that should be plotted. A convenient
+          way to zoom in for all subplots.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+      </variablelist>
+
+   </refsection>
+
+
+   <refsection><title>Description</title>
+
+      <itemizedlist>
+
+         <listitem>
+
+            <para>
+      plots data from runs of CMA-ES. Returns a struct with the data read from the files.
+     </para>
+
+         </listitem>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+      </itemizedlist>
+
+   </refsection>
+
+
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+
+   ]]></programlisting></refsection>
+
+
+   <refsection><title>See Also</title><simplelist type="inline">
+
+      <member>
+         <link linkend="cma_new"> cma_new</link>
+      </member>
+
+      <member>
+         <link linkend="cma_optim"> cma_optim</link>
+      </member>
+
+   </simplelist></refsection>
+
+
+   <refsection><title>Authors</title><variablelist>
+
+      <varlistentry><term>Nikolaus Hansen</term><listitem><para>
+
+      </para></listitem></varlistentry>
+
+   </variablelist></refsection>
+
+
+</refentry>

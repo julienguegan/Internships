@@ -1,0 +1,127 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>cma_tell</title>
+    <style type="text/css" media="all">
+      @import url("scilab_code.css");
+      @import url("xml_code.css");
+      @import url("c_code.css");
+      @import url("style.css");
+    </style>
+  </head>
+  <body>
+    <div class="manualnavbar">
+    <table width="100%"><tr>
+      <td width="30%">
+    	<span class="previous"><a href="cma_plot.html">&lt;&lt; cma_plot</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_660c0092e940e261c16688aa59c23caf.html">CMA-ES Optimization Toolbox</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+
+
+
+    <span class="path"><a href="index.html">CMA-ES Optimization Toolbox</a> &gt;&gt; <a href="section_660c0092e940e261c16688aa59c23caf.html">CMA-ES Optimization Toolbox</a> &gt; cma_tell</span>
+
+    <br /><br />
+    <div class="info"></div>
+
+<div class="refnamediv"><h1 class="refname">cma_tell</h1>
+  <p class="refpurpose">Deliver function values to cma minimizer</p></div>
+
+<div class="refsynopsisdiv"><h3 class="title">Calling Sequence</h3>
+  <div class="synopsis"><pre><span class="default">es</span><span class="default"> = </span><span class="functionid">cma_tell</span><span class="default">(</span><span class="default">es</span><span class="default">,</span><span class="default">X</span><span class="default">,</span><span class="default">arfitness</span><span class="default">)</span>
+<span class="default">es</span><span class="default"> = </span><span class="default">%cma_tell</span><span class="default">(</span><span class="default">es</span><span class="default">,</span><span class="default">X</span><span class="default">,</span><span class="default">arfitness</span><span class="default">) </span><span class="comment">// the same</span></pre></div></div>
+
+   <div class="refsection"><h3 class="title">Parameters</h3>
+
+      <dl><dt><span class="term">es</span>
+
+            <dd><p class="para">cma object</p></dd></dt>
+
+
+         <dt><span class="term">X</span>
+
+            <dd><p class="para">list of lambda column vectors of the search space</p></dd></dt>
+
+
+         <dt><span class="term">arfitness</span>
+
+            <dd><p class="para">vector of objective (cost) function values, such that arfitness(i) = cost_function(X(i))</p></dd></dt>
+
+
+         <dt><span class="term">es</span>
+
+            <dd><p class="para">updated cma object</p></dd></dt></dl></div>
+
+
+   <div class="refsection"><h3 class="title">Description</h3>
+
+      <ul class="itemizedlist"><li><p class="para">cma_tell() concludes the iteration for the cma object and updates all distribution
+        parameters for the next iteration step.</p></li>
+
+         <li><p class="para"></p></li></ul></div>
+
+
+   <div class="refsection"><h3 class="title">Examples</h3><div class="programlisting"><table border="0" width="100%"><tr><td width="98%"><pre class="scilabcode"><span class="scilabid">param</span><span class="scilaboperator">.</span><span class="scilabfield">x0</span> <span class="scilaboperator">=</span> <a class="scilabcommand" href="scilab://ones">ones</a><span class="scilabopenclose">(</span><span class="scilabnumber">8</span><span class="scilabdefault">,</span><span class="scilabnumber">1</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabid">param</span><span class="scilaboperator">.</span><span class="scilabfield">sigma0</span> <span class="scilaboperator">=</span> <span class="scilabnumber">0.5</span><span class="scilabdefault">;</span>
+<span class="scilabid">es</span> <span class="scilaboperator">=</span> <span class="scilabid">cma_new</span><span class="scilabopenclose">(</span><span class="scilabid">param</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabskeyword">while</span> <span class="scilaboperator">~</span> <span class="scilabid">cma_stop</span><span class="scilabopenclose">(</span><span class="scilabid">es</span><span class="scilabopenclose">)</span> <span class="scilabcomment">// es.out.stopflags is empty</span>
+  <span class="scilabid">X</span> <span class="scilaboperator">=</span> <span class="scilabid">cma_ask</span><span class="scilabopenclose">(</span><span class="scilabid">es</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>   <span class="scilabcomment">// returns a list of lambda column vectors</span>
+  <span class="scilabid">y</span> <span class="scilaboperator">=</span> <span class="scilabopenclose">[</span><span class="scilabopenclose">]</span><span class="scilabdefault">;</span>
+  <span class="scilabskeyword">for</span> <span class="scilabid">i</span> <span class="scilaboperator">=</span> <span class="scilabnumber">1</span><span class="scilabspecial">:</span><a class="scilabcommand" href="scilab://length">length</a><span class="scilabopenclose">(</span><span class="scilabid">X</span><span class="scilabopenclose">)</span>
+    <span class="scilabid">y</span><span class="scilabopenclose">(</span><span class="scilabid">i</span><span class="scilabopenclose">)</span> <span class="scilaboperator">=</span> <span class="scilabid">costf</span><span class="scilabopenclose">(</span><span class="scilabid">X</span><span class="scilabopenclose">(</span><span class="scilabid">i</span><span class="scilabopenclose">)</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span> <span class="scilabcomment">// costf needs to be defined</span>
+  <span class="scilabskeyword">end</span>
+  <span class="scilabid">es</span> <span class="scilaboperator">=</span> <span class="scilabid">cma_tell</span><span class="scilabopenclose">(</span><span class="scilabid">es</span><span class="scilabdefault">,</span> <span class="scilabid">X</span><span class="scilabdefault">,</span> <span class="scilabid">y</span><span class="scilaboperator">&#0039;</span><span class="scilabopenclose">)</span><span class="scilabdefault">;</span>
+<span class="scilabskeyword">end</span></pre></td><td valign="top"><a href="scilab://scilab.execexample/"><img src="ScilabExecute.png" border="0"/></a></td><td valign="top"><a href="scilab://scilab.editexample/"><img src="ScilabEdit.png" border="0"/></a></td><td></td></tr></table></div></div>
+
+
+   <div class="refsection"><h3 class="title">See Also</h3><ul class="itemizedlist"><li class="member"><a href="cma_new.html" class="link">cma_new</a></li>
+
+      <li class="member"><a href="cma_ask.html" class="link">cma_ask</a></li>
+
+      <li class="member"><a href="cma_plot.html" class="link">cma_plot</a></li>
+
+      <li class="member"><a href="cma_optim.html" class="link">cma_optim</a></li></ul></div>
+
+
+   <div class="refsection"><h3 class="title">Authors</h3><dl><dt><span class="term">Nikolaus Hansen</span><dd><p class="para"></p></dd></dt></dl></div>
+
+
+   <div class="refsection"><h3 class="title">Bibliography</h3>
+
+      <p class="para"></p></div>
+
+
+   <div class="refsection"><h3 class="title">Used Functions</h3>
+
+      <p class="para"></p></div>
+    <br />
+
+    <div class="manualnavbar">
+    <table width="100%">
+    <tr><td colspan="3" class="next"><a href="http://bugzilla.scilab.org/enter_bug.cgi?product=Scilab%20software&component=Documentation%20pages" class="ulink">Report an issue</a></td></tr>
+<tr>
+      <td width="30%">
+    	<span class="previous"><a href="cma_plot.html">&lt;&lt; cma_plot</a></span>
+
+      </td>
+      <td width="40%" class="center">
+      	<span class="top"><a href="section_660c0092e940e261c16688aa59c23caf.html">CMA-ES Optimization Toolbox</a></span>
+
+      </td>
+      <td width="30%" class="next">
+      	
+      </td>
+    </tr></table>
+      <hr />
+    </div>
+  </body>
+</html>

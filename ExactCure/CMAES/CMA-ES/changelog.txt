@@ -1,0 +1,21 @@
+changelog of the CMA-ES ATOMS module
+
+Please update this file to describe the modifications of your toolbox
+
+A format of change log could be:
+
+
+CMA-ES (initial version)
+    * Change 0 - initial release (attempt)
+    * Change 1 - modified help section to comply with DocBook v5 + added cma_demo()
+    * Change 2 - modified builder script, added test script, improved etc/start-script
+                 added cleanmacros.sce (as in toolbox skeleton) - although the builder should generate the cleaner script, AFAIK.
+                 help files are now utf-8 and cleaned up for better reading
+    * Change 3 - modified cma.sci to prevent warning from Scilab (calculating 1./N changed to 1/N)
+                 re-modified etc/start and etc/quit script (naming only, nothing important).
+                 cma-es.start also runs cma() which loads cma-es library (previously by loader.sce)
+                 updated tests/test.sce to load demos/runcma.sce (and demos/ cleaned up).
+ -- Author <cfuttrup@gmail.com>  Mon, 20 Jan 2013 19:50:00 +0100 (v1)
+ -- Author <cfuttrup@gmail.com>  Mon, 04 Mar 2014 20:15:00 +0100 (v2)
+ -- Author <cfuttrup@gmail.com>  Mon, 07 Mar 2014 20:07:00 +0100 (v3)
+

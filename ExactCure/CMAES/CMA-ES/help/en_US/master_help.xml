@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book [
+<!--Begin Entities-->
+<!ENTITY adcd0fcc1bd23a71f920afee39aa1d59e SYSTEM "file:///C:/Users/Claus/Documents/Scilab54/Archives/CMA-ES-1.0-3-src/CMA-ES_1.0/help/en_US/cma_ask.xml">
+<!ENTITY a73231f795c145d42c4b0754dbbbfb85d SYSTEM "file:///C:/Users/Claus/Documents/Scilab54/Archives/CMA-ES-1.0-3-src/CMA-ES_1.0/help/en_US/cma_new.xml">
+<!ENTITY adad894ba50562de10f8fe9fd34a457aa SYSTEM "file:///C:/Users/Claus/Documents/Scilab54/Archives/CMA-ES-1.0-3-src/CMA-ES_1.0/help/en_US/cma_optim.xml">
+<!ENTITY a17f8b2d29f0e8863513ca6ae566ce777 SYSTEM "file:///C:/Users/Claus/Documents/Scilab54/Archives/CMA-ES-1.0-3-src/CMA-ES_1.0/help/en_US/cma_optim_restarted.xml">
+<!ENTITY a711f263370441884a340db87bce6eaac SYSTEM "file:///C:/Users/Claus/Documents/Scilab54/Archives/CMA-ES-1.0-3-src/CMA-ES_1.0/help/en_US/cma_plot.xml">
+<!ENTITY a056f783a64ff8b5116cab9684b1e83fd SYSTEM "file:///C:/Users/Claus/Documents/Scilab54/Archives/CMA-ES-1.0-3-src/CMA-ES_1.0/help/en_US/cma_tell.xml">
+<!--End Entities-->
+]>
+<book version="5.0-subset Scilab" xml:lang="en_US"
+      xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:mml="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info xml:id='cma-es_optimization_toolbox_manual'>
+    <title>CMA-ES Optimization Toolbox</title>
+  </info>
+
+<part xml:id='section_660c0092e940e261c16688aa59c23caf'>
+<title>CMA-ES Optimization Toolbox</title>
+&adcd0fcc1bd23a71f920afee39aa1d59e;
+&a73231f795c145d42c4b0754dbbbfb85d;
+&adad894ba50562de10f8fe9fd34a457aa;
+&a17f8b2d29f0e8863513ca6ae566ce777;
+&a711f263370441884a340db87bce6eaac;
+&a056f783a64ff8b5116cab9684b1e83fd;
+</part>
+</book>

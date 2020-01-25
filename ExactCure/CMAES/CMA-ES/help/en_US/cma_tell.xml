@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab"
+  xml:lang="en"
+  xml:id="cma_tell">
+
+<info><pubdate>3-May-2008</pubdate></info>
+
+<refnamediv>
+  <refname>cma_tell</refname>
+  <refpurpose>Deliver function values to cma minimizer</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <title>Calling Sequence</title>
+  <synopsis>
+    es = cma_tell(es,X,arfitness)
+    es = %cma_tell(es,X,arfitness) // the same
+  </synopsis>
+</refsynopsisdiv>
+
+   <refsection><title>Parameters</title>
+
+      <variablelist>
+
+
+         <varlistentry>
+
+            <term>es</term>
+
+            <listitem>
+
+               <para>
+        cma object
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>X</term>
+
+            <listitem>
+
+               <para>
+         list of lambda column vectors of the search space
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>arfitness</term>
+
+            <listitem>
+
+               <para>
+        vector of objective (cost) function values, such that arfitness(i) = cost_function(X(i))
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>es</term>
+
+            <listitem>
+
+               <para>
+          updated cma object
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+      </variablelist>
+
+   </refsection>
+
+
+   <refsection><title>Description</title>
+
+      <itemizedlist>
+
+         <listitem>
+
+            <para>cma_tell() concludes the iteration for the cma object and updates all distribution
+        parameters for the next iteration step.
+     </para>
+
+         </listitem>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+      </itemizedlist>
+
+   </refsection>
+
+
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  param.x0 = ones(8,1);
+  param.sigma0 = 0.5;
+  es = cma_new(param);
+  while ~ cma_stop(es) // es.out.stopflags is empty
+    X = cma_ask(es);   // returns a list of lambda column vectors
+    y = [];
+    for i = 1:length(X)
+      y(i) = costf(X(i)); // costf needs to be defined
+    end
+    es = cma_tell(es, X, y');
+  end
+  ]]></programlisting></refsection>
+
+
+   <refsection><title>See Also</title><simplelist type="inline">
+
+      <member>
+
+         <link linkend="cma_new">cma_new</link>
+
+      </member>
+
+      <member>
+
+         <link linkend="cma_ask">cma_ask</link>
+
+      </member>
+
+      <member>
+
+         <link linkend="cma_plot">cma_plot</link>
+
+      </member>
+
+      <member>
+
+         <link linkend="cma_optim">cma_optim</link>
+
+      </member>
+
+   </simplelist></refsection>
+
+
+   <refsection><title>Authors</title><variablelist>
+
+      <varlistentry><term>Nikolaus Hansen</term><listitem><para>
+
+      </para></listitem></varlistentry>
+
+   </variablelist></refsection>
+
+
+   <refsection><title>Bibliography</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+
+   <refsection><title>Used Functions</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+</refentry>

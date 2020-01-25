@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<refentry
+  xmlns="http://docbook.org/ns/docbook"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML"
+  xmlns:db="http://docbook.org/ns/docbook" version="5.0-subset Scilab"
+  xml:lang="en"
+  xml:id="cma_ask">
+
+<info><pubdate>3-May-2008</pubdate></info>
+
+<refnamediv>
+  <refname>cma_ask</refname>
+  <refpurpose>Get candidate solutions from cma optimizer</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+  <title>Calling Sequence</title>
+  <synopsis>
+    X = cma_ask(es,lambda,mod)
+    X = cma_ask(es,lambda) // the same with mod=0
+    X = cma_ask(es) // the same with lambda=es.sp.lambda
+    X = %cma_ask(es) // the same
+  </synopsis>
+</refsynopsisdiv>
+
+   <refsection><title>Parameters</title>
+
+      <variablelist>
+
+
+         <varlistentry>
+
+            <term>es</term>
+
+            <listitem>
+
+               <para>
+        cma object from cma_new
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>lambda</term>
+
+            <listitem>
+
+               <para>
+         number of column vectors to be returned
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>mod</term>
+
+            <listitem>
+
+               <para>
+         default is 0. With mod set to one, always a list of vector(s) is returned,
+         even for lambda=1.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+         <varlistentry>
+
+            <term>X</term>
+
+            <listitem>
+
+               <para>
+        list of column vectors, new candidate solutions. If lambda equals
+        to one and with default mod 0, a single vector (not a list with one vector)
+        is returned.
+       </para>
+
+            </listitem>
+
+         </varlistentry>
+
+
+      </variablelist>
+
+   </refsection>
+
+
+   <refsection><title>Description</title>
+
+      <itemizedlist>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+         <listitem>
+
+            <para>
+
+            </para>
+
+         </listitem>
+
+      </itemizedlist>
+
+   </refsection>
+
+
+   <refsection><title>Examples</title><programlisting role="example"><![CDATA[
+  clear param
+  param.x0 = ones(8,1);
+  param.sigma0 = 0.5;
+  es = cma_new(param);
+  while ~ cma_stop(es)
+    X = cma_ask(es);    // return a list with lambda column vectors
+    y = [];             // just in case
+    for i = 1:length(X) // evaluate all lambda candidate solution
+      y(i) = fitfun(X(i)); // must return a scalar
+      // re-sampling of infeasible solution if f==%nan (rejection method)
+      while isnan(y(i))
+        X(i) = cma_ask(es, 1);
+        y(i) = fitfun(X(i));
+      end
+    end
+    // do not use modified X here, unless you very well know what you do
+    es = cma_tell(es, X, y');  // finish iteration
+  end
+  ]]></programlisting></refsection>
+
+
+   <refsection><title>See Also</title><simplelist type="inline">
+
+      <member>
+         <link linkend="cma_new">cma_new</link>
+      </member>
+
+      <member>
+         <link linkend="cma_tell">cma_tell</link>
+      </member>
+
+      <member>
+         <link linkend="cma_optim">cma_optim</link>
+      </member>
+
+   </simplelist></refsection>
+
+
+   <refsection><title>Authors</title><variablelist>
+
+      <varlistentry><term>Nikolaus Hansen</term><listitem><para>
+
+      </para></listitem></varlistentry>
+
+   </variablelist></refsection>
+
+
+   <refsection><title>Bibliography</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+
+   <refsection><title>Used Functions</title>
+
+      <para>
+
+      </para>
+
+   </refsection>
+
+</refentry>

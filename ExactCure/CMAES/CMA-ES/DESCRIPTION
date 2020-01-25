@@ -1,0 +1,63 @@
+Toolbox: CMA-ES
+
+Title: CMA-ES
+
+Summary: An algorithm for difficult non-linear non-convex optimization problems.
+
+Version: 1.4
+
+Author: Claus Futtrup
+
+Maintainer: Claus Futtrup <cfuttrup@gmail.com>
+
+Category: Optimization - Metaheuristics
+
+Entity: SEAS Fabrikker A/S
+
+WebSite: http://www.cfuttrup.com
+
+URL: 
+
+License: GPL
+
+ScilabVersion: >= 5.5.1
+
+Depends: 
+
+Date: 2014-12-16
+
+Description:  Purpose
+  -------
+ 
+  This document introduces the CMA-ES Optimization (CMA-ES) in Scilab.
+ 
+  The CMA-ES is a meta-heuristic optimization process created by Nikolaus Hansen
+  initially (1,lambda)-ES in 1996 (micro = 1), later with (micro,lambda) in 1997
+  and it is based on a Covariance Matrix Adaptation technique.
+ 
+  This direct search method does not require any knowledge of the  objective
+  function derivatives.
+ 
+  The CMA-ES (Covariance Matrix Adaptation Evolution Strategy) is an
+ evolutionary
+  algorithm for difficult non-linear non-convex optimization problems in
+  continuous domain. The CMA-ES is typically applied to unconstrained or bounded
+  constraint optimization problems, and search space dimensions between three
+ and
+  a hundred. The method should be applied, if derivative based methods, e.g.
+  quasi-Newton BFGS or conjugate gradient, (supposedly) fail due to a rugged
+  search landscape (e.g. discontinuities, sharp bends or ridges, noise, local
+  optima, outliers). If second order derivative based methods are successful,
+  they are usually faster than the CMA-ES
+ 
+  This toolbox implements the original CMA-ES algorithm in two ways:
+ 
+   * the functional call (similar to Scilab fminsearch, but not exactly the
+ same)
+   * the object oriented call sequence (as described by Yann Collette)
+ 
+  The functional call supports additionally re-execution and population
+ increase.
+ 
+  See https://www.lri.fr/~hansen/cmaesintro.html for details.
+
